@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Upload from './components/Upload';
+import Status from './components/Status';
+import Result from './components/Result'; // Optional
+import DownloadSheet from './components/DownloadSheet';
+import RequestList from './components/RequestList';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li><Link to="/download">Download CSV</Link></li>
+            <li><Link to="/">Upload CSV</Link></li>
+            <li><Link to="/status">Check Status</Link></li>
+            <li><Link to="/list">Request List</Link></li> {/* Optional */}
+            <li><Link to="/result">Download Result</Link></li> {/* Optional */}
+          </ul>
+        </nav>
+
+        <Routes>
+          <Route path="/download" element={<DownloadSheet />} />
+          <Route path="/" element={<Upload />} />
+          <Route path="/status" element={<Status />} />
+          <Route path="/list" element={<RequestList />} /> {/* Optional */}
+          <Route path="/result" element={<Result />} /> {/* Optional */}
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
